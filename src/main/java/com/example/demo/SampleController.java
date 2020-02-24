@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleController {
 
   /**
-   * 施設の選択.
+   * テスト用のRestController
    *
    * @param sampleForm フォーム
    * @return

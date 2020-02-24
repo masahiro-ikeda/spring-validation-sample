@@ -2,16 +2,27 @@ package com.example.demo.handler;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * エラーの詳細を保持するレスポンス用クラス
+ */
 class ErrorDetail {
 
-    @JsonProperty("field")
-    private String field;
+  /* フィールド名 */
+  @JsonProperty("field")
+  private String field;
 
-    @JsonProperty("errorMessage")
-    private String errorMessage;
+  /* エラーメッセージ */
+  @JsonProperty("errorMessage")
+  private String errorMessage;
 
-    ErrorDetail(String field, String errorMessage) {
-        this.field = field;
-        this.errorMessage = errorMessage;
-    }
+  /**
+   * コンストラクタ
+   *
+   * @param field
+   * @param errorMessage
+   */
+  ErrorDetail(String field, String errorMessage) {
+    this.field = field;
+    this.errorMessage = errorMessage;
+  }
 }

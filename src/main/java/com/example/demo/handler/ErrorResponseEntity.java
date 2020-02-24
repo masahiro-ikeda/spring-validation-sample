@@ -4,15 +4,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * APIのエラーレスポンスを返却するためのクラス
+ */
 class ErrorResponseEntity {
-    @JsonProperty("message")
-    private String message;
 
-    @JsonProperty("errors")
-    private List<ErrorDetail> errors;
+  /* メッセージ */
+  @JsonProperty("message")
+  private String message;
 
-    ErrorResponseEntity(String message, List<ErrorDetail> errors) {
-        this.message = message;
-        this.errors = errors;
-    }
+  /* エラー詳細情報 */
+  @JsonProperty("errors")
+  private List<ErrorDetail> errors;
+
+  /**
+   * コンストラクタ
+   *
+   * @param message
+   * @param errors
+   */
+  ErrorResponseEntity(String message, List<ErrorDetail> errors) {
+    this.message = message;
+    this.errors = errors;
+  }
 }

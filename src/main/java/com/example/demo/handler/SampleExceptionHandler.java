@@ -13,25 +13,37 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * RestControllerの例外ハンドリングを行う
+ */
 @RestControllerAdvice
 public class SampleExceptionHandler extends ResponseEntityExceptionHandler {
 
+  /**
+   * BeanValidationの例外ハンドリング.
+   * 任意のレスポンスメッセージを返却できるようオーバーライド
+   *
+   * @param ex
+   * @param headers
+   * @param status
+   * @param request
+   * @return
+   */
   @Override
   protected ResponseEntity<Object> handleBindException(
-          BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+      BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-      BindingResult result = ex.getBindingResult();
+    String message = "Validation Failed";
 
-      String message = "Validation Failed";
-      List<ErrorDetail> details = result.getFieldErrors().stream()
-              .map( (FieldError error) -> new ErrorDetail(
-                      error.getField(),
-                      error.getDefaultMessage() ) )
-              .collect( Collectors.toList() );
+    BindingResult result = ex.getBindingResult();
+    List<ErrorDetail> errors = result.getFieldErrors().stream()
+        .map( (FieldError error) -> new ErrorDetail(
+            error.getField(),
+            error.getDefaultMessage() ) )
+        .collect( Collectors.toList() );
 
-      ErrorResponseEntity body = new ErrorResponseEntity(message ,details );
-      return handleExceptionInternal( ex, body, headers, status, request );
+    ErrorResponseEntity body = new ErrorResponseEntity( message, errors );
+    return handleExceptionInternal( ex, body, headers, status, request );
   }
 }
 
