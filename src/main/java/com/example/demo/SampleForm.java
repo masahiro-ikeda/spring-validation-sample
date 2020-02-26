@@ -12,14 +12,14 @@ public class SampleForm {
   /**
    * 文字列Validationテスト
    */
-  @NotEmpty(message = "{validation.notEmpty}")
-  @Size(max = 10, message = "{validation.size}")
+  @NotEmpty
+  @Size(max = 10)
   private String sample;
 
   /**
    * 数値Validationテスト
    */
-  @Max(value = 100, message = "{validation.max}")
+  @Max(value = 100)
   private int sampleNumber;
 
   public String getSample() {
